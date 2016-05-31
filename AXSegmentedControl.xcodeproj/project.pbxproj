@@ -15,6 +15,7 @@
 		018465EC1CFD269D009445BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 018465EA1CFD269D009445BF /* LaunchScreen.storyboard */; };
 		018465F71CFD269D009445BF /* AXSegmentedControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 018465F61CFD269D009445BF /* AXSegmentedControlTests.m */; };
 		018466021CFD269D009445BF /* AXSegmentedControlUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 018466011CFD269D009445BF /* AXSegmentedControlUITests.m */; };
+		018466121CFD26A8009445BF /* AXSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 018466111CFD26A8009445BF /* AXSegmentedControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		018465FD1CFD269D009445BF /* AXSegmentedControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AXSegmentedControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		018466011CFD269D009445BF /* AXSegmentedControlUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AXSegmentedControlUITests.m; sourceTree = "<group>"; };
 		018466031CFD269D009445BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		018466101CFD26A8009445BF /* AXSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXSegmentedControl.h; sourceTree = "<group>"; };
+		018466111CFD26A8009445BF /* AXSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXSegmentedControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +109,7 @@
 				018465E21CFD269D009445BF /* ViewController.h */,
 				018465E31CFD269D009445BF /* ViewController.m */,
 				018465E51CFD269D009445BF /* Main.storyboard */,
+				0184660F1CFD26A8009445BF /* AXSegmentedControl */,
 				018465E81CFD269D009445BF /* Assets.xcassets */,
 				018465EA1CFD269D009445BF /* LaunchScreen.storyboard */,
 				018465ED1CFD269D009445BF /* Info.plist */,
@@ -138,6 +142,15 @@
 				018466031CFD269D009445BF /* Info.plist */,
 			);
 			path = AXSegmentedControlUITests;
+			sourceTree = "<group>";
+		};
+		0184660F1CFD26A8009445BF /* AXSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				018466101CFD26A8009445BF /* AXSegmentedControl.h */,
+				018466111CFD26A8009445BF /* AXSegmentedControl.m */,
+			);
+			path = AXSegmentedControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				018465E41CFD269D009445BF /* ViewController.m in Sources */,
+				018466121CFD26A8009445BF /* AXSegmentedControl.m in Sources */,
 				018465E11CFD269D009445BF /* AppDelegate.m in Sources */,
 				018465DE1CFD269D009445BF /* main.m in Sources */,
 			);

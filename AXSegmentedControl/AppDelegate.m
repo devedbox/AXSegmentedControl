@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AXSegmentedControl.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [[AXSegmentedControl appearance] setMinHeight:44];
+    [[AXSegmentedControl appearance] setSelectionIndicatorHeight:5.0];
+    [[AXSegmentedControl appearance] setAnimationDuration:0.5];
+    [[AXSegmentedControl appearance] setHairlineColor:[UIColor redColor]];
+    [[AXSegmentedControl appearance] setShowsCount:NO];
+    [[AXSegmentedControl appearance] setAutoAdjustSelectionIndicatorWidth:NO];
+    [[AXSegmentedControl appearance] setSelectionIndicatorInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
+    [[AXSegmentedControl appearance] setInverseTitles:YES];
+    [[AXSegmentedControl appearance] setTintColor:[UIColor redColor]];
+    [[AXSegmentedControl appearance] setFont:[UIFont boldSystemFontOfSize:18]];
+    
     return YES;
 }
 

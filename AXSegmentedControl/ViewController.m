@@ -7,9 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "AXSegmentedControl/AXSegmentedControl.h"
 
 @interface ViewController ()
-
+///
+@property(weak, nonatomic) IBOutlet AXSegmentedControl *segmentedControl;
 @end
 
 @implementation ViewController
@@ -17,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [_segmentedControl setItems:@[@"sss", @"ddd"]];
 }
 
 - (void)didReceiveMemoryWarning {
