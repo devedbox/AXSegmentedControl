@@ -282,8 +282,8 @@
             attributes = [attributedString attributesAtIndex:0 effectiveRange:range];
         }
         
-        frame.size = CGSizeMake([title sizeWithAttributes:attributes].width, self.selectionIndicatorHeight);
-        frame.origin.x = (button.frame.size.width*(self.selectedSegmentIndex))+(button.frame.size.width-frame.size.width)/2;
+        frame.size = CGSizeMake([title sizeWithAttributes:attributes].width - (_selectionIndicatorInsets.left + _selectionIndicatorInsets.right), self.selectionIndicatorHeight);
+        frame.origin.x = (button.frame.size.width*(self.selectedSegmentIndex))+(button.frame.size.width-frame.size.width)/2 ;
     }
     else {
         frame.size = CGSizeMake(button.frame.size.width - (_selectionIndicatorInsets.left + _selectionIndicatorInsets.right), self.selectionIndicatorHeight);

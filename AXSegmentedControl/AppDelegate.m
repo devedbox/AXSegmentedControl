@@ -24,8 +24,8 @@
     [[AXSegmentedControl appearance] setAnimationDuration:0.5];
     [[AXSegmentedControl appearance] setHairlineColor:[UIColor redColor]];
     [[AXSegmentedControl appearance] setShowsCount:NO];
-    [[AXSegmentedControl appearance] setAutoAdjustSelectionIndicatorWidth:NO];
-    [[AXSegmentedControl appearance] setSelectionIndicatorInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
+    [[AXSegmentedControl appearance] setAutoAdjustSelectionIndicatorWidth:YES];
+//    [[AXSegmentedControl appearance] setSelectionIndicatorInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
     [[AXSegmentedControl appearance] setInverseTitles:YES];
     [[AXSegmentedControl appearance] setTintColor:[UIColor redColor]];
     [[AXSegmentedControl appearance] setFont:[UIFont boldSystemFontOfSize:18]];
