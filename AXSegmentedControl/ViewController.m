@@ -21,6 +21,8 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     [_segmentedControl setItems:@[@"sss", @"ddd"]];
+    [_segmentedControl setTitleFont:[UIFont systemFontOfSize:12] forState:UIControlStateNormal];
+    [_segmentedControl setTitleFont:[UIFont boldSystemFontOfSize:20] forState:UIControlStateSelected];
 }
 
 - (void)didReceiveMemoryWarning {
