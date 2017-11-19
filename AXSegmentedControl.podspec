@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "AXSegmentedControl"
-s.version      = "0.0.2"
+s.version      = "0.0.3"
 s.summary      = "`AXSegmentedControl` is an iOS customizable segmneted control that displays segmented title."
 
 s.description  = <<-DESC
@@ -21,7 +21,7 @@ s.platform     = :ios, "7.0"
   # s.ios.deployment_target = “7.0”
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
-s.source       = { :git => "https://github.com/devedbox/AXSegmentedControl.git", :tag => "0.0.2" }
+s.source       = { :git => "https://github.com/devedbox/AXSegmentedControl.git", :tag => s.version }
 s.source_files  = "AXSegmentedControl/AXSegmentedControl/*.{h,m}"
   #s.exclude_files = "Classes/Exclude"
   # s.public_header_files = "Classes/**/*.h"
