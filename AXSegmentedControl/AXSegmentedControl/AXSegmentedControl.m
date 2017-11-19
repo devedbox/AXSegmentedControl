@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIView *selectionIndicator;
 @property (nonatomic, strong) UIView *hairline;
 @property (nonatomic, strong) NSMutableDictionary *colors;
+@property (nonatomic, strong) NSMutableDictionary *fonts;
 @property (nonatomic, strong) NSMutableArray *counts; // of NSNumber
 @property (nonatomic, strong) NSArray *countLabels; // of counts
 @property (nonatomic, strong) NSMutableArray *showIndexCounts; // Wether show count at index or not.
@@ -47,7 +48,8 @@
     _hairline.backgroundColor = [UIColor lightGrayColor];
     [self addSubview:_hairline];
     
-    _colors = [NSMutableDictionary new];
+    _colors = [NSMutableDictionary dictionary];
+    _fonts = [NSMutableDictionary dictionary];
     
     _counts = [NSMutableArray array];
     
@@ -254,6 +256,17 @@
     return color;
 }
 
+- (UIFont *)titleFontForState:(UIControlState)state {
+    NSString *key = [NSString stringWithFormat:@"UIControlState%d", (int)state];
+    UIFont *font = [self.fonts objectForKey:key];
+    
+    if (!font) {
+        return self.font;
+    }
+    
+    return font;
+}
+
 - (CGRect)selectionIndicatorRect
 {
     CGRect frame = CGRectZero;
@@ -307,24 +320,24 @@
 }
 
 // Calculate the most appropriate font size for a button title
-- (CGFloat)appropriateFontSizeForIndex:(NSInteger)index
+- (CGFloat)appropriateFontSizeForIndex:(NSInteger)index forState:(UIControlState)state
 {
     if (!self.adjustsFontSizeToFitWidth) {
-        return self.font.pointSize;
+        return [self titleFontForState:state].pointSize;
     }
     
     if ((_showsCount && ![[_showIndexCounts objectAtIndex:index] boolValue]) || !_showsCount) {
-        return self.font.pointSize;
+        return [self titleFontForState:state].pointSize;
     }
     NSString *title = [_items objectAtIndex:index];
-    CGFloat fontSize = self.font.pointSize;
+    CGFloat fontSize = [self titleFontForState:state].pointSize;
     CGFloat minFontSize = 14.0;
     CGFloat buttonWidth = roundf(self.bounds.size.width/self.numberOfSegments);
     CGSize constraintSize = CGSizeMake(buttonWidth, MAXFLOAT);
     
     do {
         // Creates a new font instance with the current font size
-        UIFont *font = [UIFont fontWithName:self.font.fontName size:fontSize];
+        UIFont *font = [UIFont fontWithName:[self titleFontForState:state].fontName size:fontSize];
         
         CGRect textRect = [title boundingRectWithSize:constraintSize options:0 attributes:@{NSFontAttributeName:font} context:nil];
         
@@ -473,6 +486,42 @@
     button.backgroundColor = tintColor;
 }
 
+- (void)setTitleFont:(UIFont *)font forState:(UIControlState)state {
+    NSAssert([font isKindOfClass:[font class]], @"Cannot assign a title font with an unvalid font object.");
+    
+    for (NSInteger i = 0; i < [[self buttons] count]; i ++) {
+        UIButton *button = [[self buttons] objectAtIndex:i];
+        
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:[button attributedTitleForState:state]];
+        NSString *string = attributedString.string;
+        
+        if (self.showsCount) {
+            
+            NSArray *components = [attributedString.string componentsSeparatedByString:@"\n"];
+            
+            NSString *count = nil;
+            NSString *title = nil;
+            
+            if (components.count < 2) {
+                title = [components objectAtIndex:0];
+            }else{
+                count = [components objectAtIndex:self.inverseTitles ? 1 : 0];
+                title = [components objectAtIndex:self.inverseTitles ? 0 : 1];
+            }
+            
+            if (count) [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:[string rangeOfString:count]];
+            [attributedString addAttribute:NSFontAttributeName value:font range:[string rangeOfString:title]];
+        } else {
+            [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, attributedString.string.length)];
+        }
+        
+        [button setAttributedTitle:attributedString forState:state];
+    }
+    
+    NSString *key = [NSString stringWithFormat:@"UIControlState%d", (int)state];
+    [self.fonts setObject:font forKey:key];
+}
+
 - (void)setTitleColor:(UIColor *)color forState:(UIControlState)state
 {
     NSAssert([color isKindOfClass:[UIColor class]], @"Cannot assign a title color with an unvalid color object.");
@@ -505,10 +554,10 @@
                 title = [components objectAtIndex:self.inverseTitles ? 0 : 1];
             }
             
-            CGFloat fontSizeForTitle = [self appropriateFontSizeForIndex:i];
+            CGFloat fontSizeForTitle = [self appropriateFontSizeForIndex:i forState:state];
             
             if (count) [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:[string rangeOfString:count]];
-            [attributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:self.font.fontName size:fontSizeForTitle] range:[string rangeOfString:title]];
+            [attributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:[self titleFontForState:state].fontName size:fontSizeForTitle] range:[string rangeOfString:title]];
             
             if (state == UIControlStateNormal) {
                 
@@ -535,7 +584,7 @@
                 }
             }
         } else {
-            [attributedString addAttribute:NSFontAttributeName value:self.font range:NSMakeRange(0, attributedString.string.length)];
+            [attributedString addAttribute:NSFontAttributeName value:[self titleFontForState:state] range:NSMakeRange(0, attributedString.string.length)];
             [attributedString addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, attributedString.string.length)];
         }
         

@@ -74,6 +74,12 @@
 /// @param segment An index number identifying a segment in the control. It must be a number between 0 and the number of segments (numberOfSegments) minus 1; values exceeding this upper range are pinned to it.
 - (void)setTitle:(NSString *)title forSegmentAtIndex:(NSUInteger)segment;
 ///
+/// Sets the title font for a particular state.
+///
+/// @param font A font to be rendered for each the segment's state.
+/// @param state The state that uses the styled title. The possible values are described in UIControlState.
+- (void)setTitleFont:(UIFont *)font forState:(UIControlState)state;
+///
 /// Sets the title color for a particular state.
 ///
 /// @param color A color to be rendered for each the segment's state.
